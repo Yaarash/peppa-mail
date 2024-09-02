@@ -1,0 +1,49 @@
+.email-list {
+    width: 100%;
+    margin: 0;
+    list-style: none;
+    display: grid;
+    background-color: rgb(236, 235, 246);
+  }
+  
+  .email-list li {
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    
+    height: 48px;
+    display: block;
+
+  }
+  
+  .email-list li:hover {
+    background-color: #f5f5f5; /* Add hover effect */
+  }
+  .email-list li button{
+    display: none;
+  }
+  .email-list li:hover button{
+    display: block;
+  }
+  
+
+  .email-list li .email-date{
+    display: block;
+  }
+  .email-list li:hover .email-date{
+    display: none;
+  }
+  /* Style the EmailPreview component (assuming it renders sender, subject)
+  .email-preview {
+    flex-grow: 1; /* Allow remaining space for content */
+  /* } */
+  
+
+  
+  .email-list button {
+    border: none; /* Remove button border */
+    background-color: transparent; /* Transparent background */
+    cursor: pointer; /* Indicate clickable button */
+    color: #999; /* Lighter gray for delete button */
+    font-size: 16px; /* Consistent font size */
+  }

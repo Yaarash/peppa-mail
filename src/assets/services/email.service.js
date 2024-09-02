@@ -16,6 +16,9 @@ import { saveToStorage, loadFromStorage } from "./util.service";
 
 export const emailService = {
     query,
+    remove,
+    getById,
+    save,
     getDefaultFilter
 };
 
@@ -27,22 +30,40 @@ async function query(filterBy) {
     let emails = await storageService.query(STORAGE_KEY);
 
     if (filterBy) {
-        // let { minBatteryStatus = 0, model = '' } = filterBy;
+        let { subject = '', body = '', to = 'user@appsus.com', from = '' } = filterBy;
 
-        // emails = emails.filter(email =>
-        //     email.model.toLowerCase().includes(model.toLowerCase()) &&
-        //     email.batteryStatus > minBatteryStatus
-        // );
+        emails = emails.filter(email =>
+            email.subject.toLowerCase().includes(subject.toLowerCase()) &&
+            email.body.toLowerCase().includes(body.toLowerCase()) &&
+            email.to.toLowerCase().includes(to.toLowerCase()) &&
+            email.from.toLowerCase().includes(from.toLowerCase())
+        );
     }
     return emails;
 }
 
+function remove(id) {
+    return storageService.remove(STORAGE_KEY, id)
+}
+
+function getById(id) {
+    return storageService.get(STORAGE_KEY, id)
+}
+
+function save(email) {
+    if (email.id) {
+        return storageService.put(STORAGE_KEY, email)
+    } else {
+        return storageService.post(STORAGE_KEY, email)
+    }
+}
+
 function getDefaultFilter() {
     return {
-        type: '',
-        minBatteryStatus: 0,
-        maxBattery: '',
-        model: ''
+        subject: '',
+        body: '',
+        to: '',
+        from: ''
     }
 }
 
