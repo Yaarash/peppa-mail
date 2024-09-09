@@ -17,6 +17,10 @@ export function EmailIndex() {
     loadEmails()
   }, [filterBy]);
 
+  useEffect(() => {
+    console.log(emails)
+  }, [emails]);
+
   async function loadEmails() {
     try {
         const emails = await emailService.query(filterBy);
@@ -39,14 +43,30 @@ export function EmailIndex() {
 
   async function starEmail(emailId) {
     try {
-      const emailToStar = await emailService.getById(emailId);
-      emailToStar.isStared = !emailToStar.isStared;
-      console.log(emailToStar);
-      await emailService.save(emailToStar);
-
+    const idx  = emails.findIndex(m => m.id === emailId);
+    emails[idx].isStared=!emails[idx].isStared;
+    emailService.save(emails[idx]);
+     
+    setEmails(prev => ([...emails]))
     } catch (err) {
         console.log(err)            
         alert('Couldnt star email')
+    }
+  }
+
+  async function markAsRead(emailId) {
+    try {
+      const idx = emails.findIndex(m => m.id === emailId);
+      if (!emails[idx].isRead) {
+        emails[idx].isRead = !emails[idx].isRead;
+      }
+      emailService.save(emails[idx]);
+
+      setEmails(prev => ([...emails]));
+      console.log(emails[idx]);
+    } catch (err) {
+        console.log(err)            
+        alert('Couldnt mark email as read')
     }
   }
 
@@ -65,6 +85,6 @@ export function EmailIndex() {
                 <EmailFilter filterBy={filterBy} onFilterBy={onFilterBy}/>
         </section>
         
-        <EmailList emails={emails} onRemove={removeEmail} toggleStar={starEmail} />
+        <EmailList emails={emails} onRemove={removeEmail} toggleStar={starEmail} markAsRead={markAsRead}/>
   </section>;
 }

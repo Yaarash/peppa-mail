@@ -62,12 +62,12 @@ input {
 /* MAC like scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: black;
     -webkit-border-radius: 100px;
 }
 
 ::-webkit-scrollbar:hover {
-    background-color: rgba(0, 0, 0, 0.09);
+    background-color: black;
 }
 
 ::-webkit-scrollbar-thumb:vertical {
@@ -91,7 +91,7 @@ input {
 }
 
 .main-app > footer {
-    background-color: #111;
+    background-color: black;
     color: white;
 }
 

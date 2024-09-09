@@ -3,7 +3,7 @@
     margin: 0;
     list-style: none;
     display: grid;
-    background-color: rgb(236, 235, 246);
+    background-color: whitesmoke;
   }
   
   .email-list li {
@@ -17,7 +17,8 @@
   }
   
   .email-list li:hover {
-    background-color: #f5f5f5; /* Add hover effect */
+    background-color: whitesmoke; /* Add hover effect */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   }
   .email-list li button{
     display: none;

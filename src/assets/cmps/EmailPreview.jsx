@@ -11,24 +11,30 @@ function _timestamp( timestamp ) {
     return <div>{formattedDate}</div>;
   }
 
-export function EmailPreview({ email, onRemove, onToggleStar }) {
+export function EmailPreview({ email, onRemove, onToggleStar, onMarkAsRead }) {
     const [ isStared, toggleStar ] = useState(email.isStared);
+    const [ isRead, toggleReadEmail ] = useState(email.isRead);
 
     function _changeToggleStar(email) {
         console.log('clicked star');
-        toggleStar(!email.isStared)
-        onToggleStar(email.id)
+        toggleStar(!email.isStared);
+        onToggleStar(email.id);
     }
 
-    return <section className="email-preview">
+    function _markAsRead({ id }) {
+        console.log('read email');
+        toggleReadEmail(!email.isRead);
+        onMarkAsRead(id);
+    }
+
+    return <section className="email-preview unread">
         <span>{email.from}</span> <span>{email.subject}</span> 
-        <Link className='text-overflow' to={`/email/${email.id}`}>{email.body}</Link>
+        <Link className={isRead ? 'text-overflow unread' : 'text-overflow read'} to={`/email/${email.id}`} onClick={() => _markAsRead(email)}>{email.body}</Link>
         <button onClick={() => onRemove(email.id)}>
             <img src={deleteIcon} className="delete-button" alt="Delete" />
-        </button>
+        </button> 
         <button className={isStared ? 'star-icon full :before' : 'star-icon'} onClick={() => _changeToggleStar(email)}>
         ☆
-        {/* <img src={starIcon} className="hollow-star-button" alt="Star" /> */}
         </button>  
         <span className='email-date'>{_timestamp(email.sentAt)}</span>
     </section>

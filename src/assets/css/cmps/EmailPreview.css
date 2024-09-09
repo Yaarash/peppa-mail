@@ -17,19 +17,29 @@
   }
 
 
+.read  {
+  background-color: #ECEBF6;
+}
+
+.unread {
+  background-color: whitesmoke;
+}
+
 .text-overflow {
   white-space: nowrap; /* Prevent text from wrapping to the next line */
   overflow: hidden; /* Hide overflowing text */
   text-overflow: ellipsis;
 }
 
-.star-icon {
+.star-icon.empty {
+  text-shadow: 0 0 2px rgba(0,0,0,0.7);
   color: #ddd;
   font-size: 2em;
+  content: '\2605'; /* Full star in UTF-8 */
   position: relative;
 }
 
-.star-icon.full:before {
+.full:before {
   text-shadow: 0 0 2px rgba(0,0,0,0.7);
   color: #FDE16D;
   content: '\2605'; /* Full star in UTF-8 */

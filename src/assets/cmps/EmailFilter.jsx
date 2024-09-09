@@ -18,7 +18,7 @@ export function EmailFilter({ filterBy, onFilterBy }) {
     }
 
     return <section className="email-filter">
-        <label htmlFor="subject">Search by subject</label>
+        <label htmlFor="subject">Search by subject </label>
         <input 
             type = "text"
             value={filterByToEdit.subject} 
